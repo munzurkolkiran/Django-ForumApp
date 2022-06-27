@@ -1,26 +1,83 @@
-{% extends 'main.html' %} {% block content %} {% if page == 'login' %}
-<div class="login">
-    <form method="POST" action="">
-        {% csrf_token %}
+{% extends 'main.html' %} {% block content %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .login-container {
+        display: flex;
+        height: 70vh;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .login {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 30px;
+        box-shadow: 1px 0px 16px rgba(0, 0, 0, .4);
+    }
+    
+    form {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    label,
+    input {
+        padding: .2rem;
+        font-size: 1.2rem;
+    }
+    
+    .loginbtn {
+        color: white;
+        background-color: royalblue;
+        margin-top: 1rem;
+    }
+    
+    .register-container {
+        display: flex;
+        justify-content: center;
+        height: 70vh;
+    }
+    
+    .register {
+        padding: 1rem;
+        border-radius: 30px;
+        box-shadow: 1px 0px 16px rgba(0, 0, 0, .4);
+    }
+</style>
 
-        <label for="username">username:</label>
-        <input type="text" name="username" placeholder="enter username">
+{% if page == 'login' %}
+<div class="login-container">
+    <div class="login">
+        <form method="POST" action="">
+            {% csrf_token %}
 
-        <label for="password">password:</label>
-        <input type="password" name="password" placeholder="enter password">
+            <label for="username">username:</label>
+            <input type="text" name="username" placeholder="enter username">
 
-        <input type="submit" value='Login'>
-    </form>
-    <p>haven't signed yet</p>
-    <a href="{% url 'register' %}">Sign ip</a>
-</div>
-{% else %}
-<div class="register">
-    <form method="POST" action="">
-        {% csrf_token %} {{form.as_p}}
-        <input type="submit" value='Register' name="" id="">
-    </form>
-    <p>alredy signed up</p>
-    <a href="{% url 'login' %}">Login</a>
+            <label for="password">password:</label>
+            <input type="password" name="password" placeholder="enter password">
+
+            <input class="loginbtn" type="submit" value='Login'>
+        </form>
+        <p>haven't signed yet</p>
+        <a href="{% url 'register' %}">Sign ip</a>
+    </div>
+    {% else %}
+    <div class="register-container">
+        <div class="register">
+            <form method="POST" action="">
+                {% csrf_token %} {{form.as_p}}
+                <input class="loginbtn" type="submit" value='Register' name="" id="">
+            </form>
+            <p>already signed up</p>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
 </div>
 {% endif %} {% endblock content %}

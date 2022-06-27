@@ -1,42 +1,173 @@
 {% extends 'main.html' %} {% block content %}
 
 <style>
-    .container {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .home-container {
+        position: relative;
         display: flex;
         flex-direction: column;
         display: grid;
         grid-template-columns: 1fr 3fr;
     }
+    
+    .home-sidebar {
+        padding: 1rem;
+        text-align: center;
+        position: fixed;
+        top: 150px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar-header {
+        margin-bottom: 2rem;
+    }
+    
+    .home-sidebar a {
+        display: flex;
+        text-decoration: none;
+        padding: 1rem;
+        border: 1px solid royalblue;
+        width: 100%;
+        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
+    }
+    
+    .topics {
+        margin-top: 1rem;
+    }
+    
+    .home-main {
+        position: absolute;
+        top: 50px;
+        left: 350px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .room-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border: 1px solid royalblue;
+        width: 60vw;
+        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
+        margin-bottom: 2rem;
+    }
+    
+    .room-count {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.2rem;
+    }
+    
+    .room-info a {
+        padding: 1rem;
+        font-size: 1.2rem;
+        font-family: 'Courier New', Courier, monospace;
+        text-decoration: none;
+        background-color: rgb(164, 181, 233);
+        text-transform: uppercase;
+        font-weight: bold;
+        color: black;
+    }
+    
+    .rooms-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .room-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .rooms {
+        border: 1px solid rgb(15, 29, 70);
+        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
+        margin-bottom: 1rem;
+    }
+    
+    .duzenleme {
+        padding: 1rem;
+    }
+    
+    .yazar {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        background-color: rgb(164, 181, 233);
+        color: black;
+    }
+    
+    .duzenleme a {
+        text-decoration: none;
+        color: black;
+        border: 1px solid royalblue;
+        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
+    }
+    
+    .room-content {
+        padding-left: .4rem;
+    }
+    
+    .room-content h5 {
+        margin-bottom: 1rem;
+    }
+    
+    .room-content a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: red;
+        border: 1px solid orange;
+    }
 </style>
-<div class="container">
-    <div class="sidebar">
-        <hr>
 
-        <h3>Browse Topics</h3>
 
-        <div>
-            <a href="{% url 'home' %}">All</a>
+<div class="home-container">
+    <div class="home-sidebar">
+        <div class="sidebar-header">
+            <h3>Browse Topics</h3>
         </div>
-        {% for topic in topics %}
         <div>
-            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+            <a href="{% url 'home' %}">All</a> {% for topic in topics %}
+            <div class="topics">
+                <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
-    <div>
-        <h5>{{room_count}} rooms avaiable</h5>
-        <a href="{% url 'create-room' %}">Create room</a>
-        <div>
+    <div class="home-main">
+        <div class="room-info">
+            <div class="room-count">
+                <h5>{{room_count}} rooms avaiable</h5>
+            </div>
+            <a href="{% url 'create-room' %}">Create room</a>
+        </div>
+
+        <div class="rooms-container">
             {% for room in rooms %}
-            <div>
-                {% if request.user == room.host %}
-                <a href="{% url 'update-room' room.id%}">Edit</a>
-                <a href="{% url 'delete-room' room.id %}">Delete</a> {% endif %}
-                <span>Yazar : @{{room.host.username}}</span>
-                <h5>{{room.id}}--<a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
-                <small>Room's name : {{room.topic.name}}</small>
-                <hr>
+            <div class="rooms">
+                <div class="room-wrapper">
+
+                    <div class="yazar">
+                        <span>Yazar : @{{room.host.username}}</span>
+                    </div>
+                    {% if request.user == room.host %}
+
+                    <div class="duzenleme">
+                        <a href="{% url 'update-room' room.id%}">Edit</a>
+                        <a href="{% url 'delete-room' room.id %}">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="room-content">
+                    <h5><a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
+                    <small>Room's name : {{room.topic.name}}</small>
+                </div>
             </div>
             {% endfor %}
         </div>

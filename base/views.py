@@ -10,11 +10,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
-# rooms = [
-#     {'id': 1, 'name': 'lets learn python!'},
-#     {'id': 2, 'name': 'design with me!'},
-#     {'id': 3, 'name': 'frontend developers!'},
-# ]
 
 def registerPage(request):
     form = UserCreationForm()
