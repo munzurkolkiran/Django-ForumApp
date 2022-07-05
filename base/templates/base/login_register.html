@@ -72,7 +72,7 @@
     <div class="register-container">
         <div class="register">
             <form method="POST" action="">
-                {% csrf_token %} {{form.as_p}}
+                {% csrf_token %} {{RegisterForm}} {{form.as_p}}
                 <input class="loginbtn" type="submit" value='Register' name="" id="">
             </form>
             <p>already signed up</p>
