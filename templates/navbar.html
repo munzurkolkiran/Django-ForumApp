@@ -4,6 +4,7 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 2rem;
+        padding: 0.4rem;
     }
     
     .logo {
@@ -36,10 +37,6 @@
         display: flex;
     }
     
-    .links {
-        text-transform: lowercase;
-    }
-    
     .link {
         font-size: 1.4rem;
         padding: 1rem;
@@ -60,9 +57,11 @@
 
 
 <div class="navbar">
-    <a href="/" class="logo">
-        <img src="https://raw.githubusercontent.com/munzurkolkiran/logo/main/logo.jpg">
-    </a>
+    <div class="navbar-logo">
+        <a href="/" class="logo">
+            <img src="https://raw.githubusercontent.com/munzurkolkiran/logo/main/logo.jpg">
+        </a>
+    </div>
     <div class="search">
         <form method="GET" action="{% url 'home' %}">
             <input class="search-input" type="text" name="q" placeholder="Search Rooms..." />
@@ -73,7 +72,7 @@
             {% if request.user.is_authenticated %}
             <p class="hello">Hello {{request.user}}</p>
         </div>
-        <div>
+        <div class="navbar-link">
             <a href="{% url 'logout' %}" class="link">Logout</a> {% else %}
             <a href="{% url 'login' %}" class="link">Login</a>
             <a href="{% url 'register' %}" class="link">Register</a> {% endif %}
