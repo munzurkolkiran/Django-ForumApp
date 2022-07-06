@@ -55,6 +55,7 @@
 
 <form action="" method="POST">
     {% csrf_token %}
+    <input type="hidden" name="next" value="{{request.META.HTTP_REFERER }}">
     <div class="delete-container">
         <p class=" delete-p">Are you sure you want to delete "{{obj}}"?</p>
         <div class="delete-inputs">

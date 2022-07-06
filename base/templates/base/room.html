@@ -11,6 +11,7 @@
         display: flex;
         flex-direction: column;
         margin-right: 3rem;
+        margin-left: 3rem;
     }
     
     .room-elements {
@@ -21,12 +22,9 @@
     }
     
     .room-elements h1 {
-        box-shadow: 0px 0px 2px 4px rgba(94, 0, 0, 0.4);
         padding: 1rem;
-        border-radius: 20px;
         text-align: center;
         width: 30%;
-        border-radius: 50px;
         font-family: 'Trispace', sans-serif;
     }
     
@@ -38,6 +36,7 @@
     .comment-wrapper {
         display: flex;
         flex-direction: column;
+        margin-left: 1rem;
     }
     
     .comment-wrapper h3 {
@@ -62,14 +61,14 @@
         text-align: center;
         border: none;
         border-radius: 10px;
-        margin: .6rem 0;
+        margin: 0.8rem 0 1.6rem 0;
         font-family: 'Roboto Slab', serif;
-        text-align: justify;
     }
     
     .room-comment-section {
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
     
     .room-comments {
@@ -77,7 +76,7 @@
         box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
         margin-bottom: 1rem;
         padding: 1rem;
-        max-width: 800px;
+        max-width: 700px;
     }
     
     .room-comment-container {
@@ -104,18 +103,34 @@
         display: flex;
         flex-direction: column;
         text-align: center;
+        width: 100%;
+        align-items: center;
     }
     
     .participants h3 {
         box-shadow: 0px 0px 2px 4px rgba(94, 0, 0, 0.4);
         padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .participants-username {
+        margin-bottom: 1rem;
+        font-weight: bold;
+        font-size: 1.35rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
     .yorum-body {
         overflow-wrap: break-word;
+        padding: 1rem 3rem 1rem 3rem;
+    }
+    
+    .hr {
+        margin-bottom: 1rem;
     }
 </style>
 
+<hr class="hr">
 
 <div class="room-container">
     <div class="room-main">
@@ -144,8 +159,9 @@
                     <div class="small-container">
                         <small class="message-user"> @{{message.user}}</small>
                         <small class="message-time">{{message.created|timesince}} ago</small>
-                    </div>{% if request.user == message.user %}
-                    <a class="message-delete" href="{% url 'delete-message' message.id%}">Delete</a> {% endif %}</div>
+                    </div>
+                    {% if request.user == message.user %}
+                    <a class="message-delete" href="{% url 'delete-message' message.id %}">Delete</a> {% endif %} </div>
                 <p class="yorum-body">{{message.body}}</p>
             </div>
             {% endfor %}
@@ -156,7 +172,7 @@
     <div class="participants">
         <h3>Participants</h3>
         {% for user in participants %}
-        <p>@{{user.username}}</p>
+        <p class="participants-username">@{{user.username}}</p>
         {% endfor %}
     </div>
 </div>

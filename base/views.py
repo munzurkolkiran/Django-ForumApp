@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 def registerPage(request):
@@ -17,7 +18,7 @@ def registerPage(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            user.username = user.username
             user.save()
             login(request, user)
             return redirect('home')
@@ -32,7 +33,7 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
@@ -78,11 +79,15 @@ def room(request, pk):
     participants = room.participants.all()
 
     if request.method == 'POST':
-        mesage = Message.objects.create(
-            user=request.user,
-            room=room,
-            body=request.POST.get('body')
-        )
+        if request.POST.get('body') != '':
+            mesage = Message.objects.create(
+                user=request.user,
+                room=room,
+                body=request.POST.get('body')
+            )
+        else:
+            return HttpResponse('Your are not comment empty value!!')
+
         room.participants.add(request.user)
         return redirect('room', pk=room.id)
 
@@ -146,6 +151,7 @@ def deleteMessage(request, pk):
 
     if request.method == 'POST':
         message.delete()
-        return redirect('home')
+        next = request.POST.get('next', '/')
+        return HttpResponseRedirect(next)
 
     return render(request, 'base/delete.html', {'obj': message})
