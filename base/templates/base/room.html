@@ -4,6 +4,7 @@
         font-family: 'Hind Siliguri', sans-serif;
         display: grid;
         grid-template-columns: 3fr 1fr;
+        text-align: justify;
     }
     
     .room-main {
@@ -62,6 +63,8 @@
         border: none;
         border-radius: 10px;
         margin: .6rem 0;
+        font-family: 'Roboto Slab', serif;
+        text-align: justify;
     }
     
     .room-comment-section {
@@ -74,6 +77,27 @@
         box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
         margin-bottom: 1rem;
         padding: 1rem;
+        max-width: 800px;
+    }
+    
+    .room-comment-container {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .message-time {
+        color: gray;
+    }
+    
+    .message-user {
+        color: black;
+        font-weight: bold;
+        font-size: 1.35rem;
+    }
+    
+    .message-delete {
+        color: blue;
+        text-decoration: none;
     }
     
     .participants {
@@ -85,6 +109,10 @@
     .participants h3 {
         box-shadow: 0px 0px 2px 4px rgba(94, 0, 0, 0.4);
         padding: 1rem;
+    }
+    
+    .yorum-body {
+        overflow-wrap: break-word;
     }
 </style>
 
@@ -103,7 +131,7 @@
             <div class="comment-form">
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <textarea name="body" placeholder="Write your message here..." rows="5" cols="50"></textarea>
+                    <textarea name="body" placeholder="Write your message here..." maxlength="1000" rows="5" cols="50"></textarea>
                     <div class="den">
                         <input class="yorum-gonder" type="submit" name="" id="" value="COMMENT">
                     </div>
@@ -112,11 +140,13 @@
             {% endif %} {% for message in roomMessages %}
 
             <div class="room-comments">
-                {% if request.user == message.user %}
-                <a href="{% url 'delete-message' message.id%}">Delete</a> {% endif %}
-
-                <small> @{{message.user}}  {{message.created|timesince}} ago</small>
-                <p>{{message.body}}</p>
+                <div class="room-comment-container">
+                    <div class="small-container">
+                        <small class="message-user"> @{{message.user}}</small>
+                        <small class="message-time">{{message.created|timesince}} ago</small>
+                    </div>{% if request.user == message.user %}
+                    <a class="message-delete" href="{% url 'delete-message' message.id%}">Delete</a> {% endif %}</div>
+                <p class="yorum-body">{{message.body}}</p>
             </div>
             {% endfor %}
         </div>

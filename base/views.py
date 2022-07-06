@@ -64,6 +64,7 @@ def home(request):
                                 Q(name__icontains=q) |
                                 Q(description__icontains=q)
                                 )
+
     topics = Topic.objects.all()
     room_count = rooms.count()
 
