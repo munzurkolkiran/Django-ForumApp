@@ -1,91 +1,91 @@
 {% extends 'main.html' %} {% block content %}
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    
-    .login-container {
-        display: flex;
-        height: 70vh;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .login {
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
-        border-radius: 30px;
-        box-shadow: 1px 0px 16px rgba(0, 0, 0, .4);
-    }
-    
-    form {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .login label,
-    input {
-        padding: .2rem;
-        font-size: 1.5rem;
-        margin-bottom: 0.4rem;
-    }
-    
-    .loginbtn {
-        color: white;
-        background-color: royalblue;
-        margin-top: 1rem;
-    }
-    
-    .register-container {
-        display: flex;
-        justify-content: center;
-    }
-    
-    .register {
-        padding: 1rem;
-        border-radius: 30px;
-        box-shadow: 1px 0px 16px rgba(0, 0, 0, .4);
-        font-size: 0rem;
-    }
-    
-    .register-Form input,
-    label {
-        padding: .2rem;
-        font-size: 1rem;
-        margin-bottom: 0.4rem;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .login-container {
+    display: flex;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 30px;
+    box-shadow: 1px 0px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  form {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login label,
+  input {
+    padding: 0.2rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .loginbtn {
+    color: white;
+    background-color: royalblue;
+    margin-top: 1rem;
+  }
+
+  .register-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .register {
+    padding: 1rem;
+    border-radius: 30px;
+    box-shadow: 1px 0px 16px rgba(0, 0, 0, 0.4);
+    font-size: 0rem;
+  }
+
+  .register-Form input,
+  label {
+    padding: 0.2rem;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
 </style>
 
 {% if page == 'login' %}
 <div class="login-container">
-    <div class="login">
-        <form method="POST" action="">
-            {% csrf_token %}
+  <div class="login">
+    <form method="POST" action="">
+      {% csrf_token %}
 
-            <label for="username">username:</label>
-            <input type="text" name="username" placeholder="enter username">
+      <label for="username">username:</label>
+      <input type="text" name="username" placeholder="enter username" />
 
-            <label for="password">password:</label>
-            <input type="password" name="password" placeholder="enter password">
+      <label for="password">password:</label>
+      <input type="password" name="password" placeholder="enter password" />
 
-            <input class="loginbtn" type="submit" value='Login'>
-        </form>
-        <p>haven't signed yet</p>
-        <a href="{% url 'register' %}">Sign ip</a>
+      <input class="loginbtn" type="submit" value="Login" />
+    </form>
+    <p>haven't signed yet</p>
+    <a href="{% url 'register' %}">Sign ip</a>
+  </div>
+  {% else %}
+  <div class="register-container">
+    <div class="register">
+      <form class="register-Form" method="POST" action="">
+        {% csrf_token %} {{registerform}}
+        <input class="loginbtn" type="submit" value="Register" name="" id="" />
+      </form>
+      <p>already signed up</p>
+      <a href="{% url 'login' %}">Login</a>
     </div>
-    {% else %}
-    <div class="register-container">
-        <div class="register">
-            <form class="register-Form" method="POST" action="">
-                {% csrf_token %} {{form}}
-                <input class="loginbtn" type="submit" value='Register' name="" id="">
-            </form>
-            <p>already signed up</p>
-            <a href="{% url 'login' %}">Login</a>
-        </div>
-    </div>
+  </div>
 </div>
 {% endif %} {% endblock content %}

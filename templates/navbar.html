@@ -1,81 +1,88 @@
 <style>
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-        padding: 0.4rem;
-        font-family: 'Hind Siliguri', sans-serif;
-    }
-    
-    .logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    img {
-        border-radius: 50%;
-        width: 5rem;
-        height: 5rem;
-    }
-    
-    .search {
-        width: 500px;
-    }
-    
-    .search-input {
-        border: none;
-        background-color: rgb(210, 187, 233);
-        padding: 1rem;
-        width: 100%;
-        font-size: 2rem;
-        color: rebeccapurple;
-        box-shadow: 5px 12px 6px rgba(0, 0, 0, .4);
-    }
-    
-    .main {
-        display: flex;
-    }
-    
-    .link {
-        font-size: 1.4rem;
-        padding: 1rem;
-        text-decoration: none;
-        color: black;
-        box-shadow: 5px 12px 6px rgba(0, 0, 0, .4);
-        border: 1px solid royalblue;
-    }
-    
-    .user {
-        margin-right: 2rem;
-    }
-    
-    .hello {
-        font-size: 1.2rem;
-    }
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 0.4rem;
+    font-family: "Hind Siliguri", sans-serif;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .search {
+    width: 500px;
+  }
+
+  .search-input {
+    border: none;
+    background-color: rgb(210, 187, 233);
+    padding: 1rem;
+    width: 100%;
+    font-size: 2rem;
+    color: rebeccapurple;
+    box-shadow: 5px 12px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .main {
+    display: flex;
+  }
+
+  .link {
+    font-size: 1.4rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: black;
+    box-shadow: 5px 12px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid royalblue;
+  }
+
+  .user {
+    margin-right: 2rem;
+  }
+
+  .hello {
+    font-size: 1.2rem;
+  }
 </style>
 
 <div class="navbar">
-    <div class="navbar-logo">
-        <a href="/" class="logo">
-            <img src="https://raw.githubusercontent.com/munzurkolkiran/logo/main/logo.jpg">
-        </a>
+  <div class="navbar-logo">
+    <a href="/" class="logo">
+      <img
+        src="https://raw.githubusercontent.com/munzurkolkiran/logo/main/logo.jpg"
+      />
+    </a>
+  </div>
+  <div class="search">
+    <form method="GET" action="{% url 'home' %}">
+      <input
+        class="search-input"
+        type="text"
+        name="q"
+        placeholder="Search Rooms..."
+      />
+    </form>
+  </div>
+  <div class="main">
+    <div class="user">
+      {% if request.user.is_authenticated %}
+      <p class="hello">Hello {{request.user}}</p>
     </div>
-    <div class="search">
-        <form method="GET" action="{% url 'home' %}">
-            <input class="search-input" type="text" name="q" placeholder="Search Rooms..." />
-        </form>
+    <div class="navbar-link">
+      <a href="{% url 'logout' %}" class="link">Logout</a> {% else %}
+      <a href="{% url 'login' %}" class="link">Login</a>
+      <a href="{% url 'register' %}" class="link">Register</a> {% endif %}
     </div>
-    <div class="main">
-        <div class="user">
-            {% if request.user.is_authenticated %}
-            <p class="hello">Hello {{request.user}}</p>
-        </div>
-        <div class="navbar-link">
-            <a href="{% url 'logout' %}" class="link">Logout</a> {% else %}
-            <a href="{% url 'login' %}" class="link">Login</a>
-            <a href="{% url 'register' %}" class="link">Register</a> {% endif %}
-        </div>
-    </div>
+  </div>
 </div>

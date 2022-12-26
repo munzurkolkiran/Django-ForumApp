@@ -1,68 +1,67 @@
 {% extends 'main.html' %} {% block content %}
 
 <style>
-    form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 99;
-    }
-    
-    .delete-container {
-        display: flex;
-        flex-direction: column;
-        font-family: 'Mingzat', sans-serif;
-        border: 1px solid rgb(15, 29, 70);
-        box-shadow: 13px 13px 15px 13px rgba(0, 0, 0, .4);
-        width: 50%;
-        padding: 1rem;
-        align-items: center;
-        justify-content: center;
-        margin-top: 7rem;
-    }
-    
-    .delete-p {
-        font-size: 1.5rem;
-    }
-    
-    .delete-inputs {
-        display: flex;
-        align-items: center;
-    }
-    
-    .delete-a {
-        text-decoration: none;
-        color: blue;
-    }
-    
-    .delete-input {
-        padding: 1rem;
-        color: white;
-        background-color: rebeccapurple;
-        border: none;
-        margin-right: 2rem;
-        cursor: pointer;
-        box-shadow: 3px 2px 4px rgba(0, 0, 0, .4);
-        transition: transform 0.2s ease-in-out;
-        border-radius: 10px;
-    }
-    
-    .delete-input:hover {
-        transform: translateY(-20px);
-    }
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+  }
+
+  .delete-container {
+    display: flex;
+    flex-direction: column;
+    font-family: "Mingzat", sans-serif;
+    border: 1px solid rgb(15, 29, 70);
+    box-shadow: 13px 13px 15px 13px rgba(0, 0, 0, 0.4);
+    width: 50%;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7rem;
+  }
+
+  .delete-p {
+    font-size: 1.5rem;
+  }
+
+  .delete-inputs {
+    display: flex;
+    align-items: center;
+  }
+
+  .delete-a {
+    text-decoration: none;
+    color: blue;
+  }
+
+  .delete-input {
+    padding: 1rem;
+    color: white;
+    background-color: rebeccapurple;
+    border: none;
+    margin-right: 2rem;
+    cursor: pointer;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .delete-input:hover {
+    transform: translateY(-20px);
+  }
 </style>
 
-
 <form action="" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{request.META.HTTP_REFERER }}">
-    <div class="delete-container">
-        <p class=" delete-p">Are you sure you want to delete "{{obj}}"?</p>
-        <div class="delete-inputs">
-            <input class="delete-input" type="submit" value="Confirm">
-            <a class="delete-a" href="{{request.META.HTTP_REFERER}}">Go back</a>
-        </div>
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{request.META.HTTP_REFERER }}" />
+  <div class="delete-container">
+    <p class="delete-p">Are you sure you want to delete "{{obj}}"?</p>
+    <div class="delete-inputs">
+      <input class="delete-input" type="submit" value="Confirm" />
+      <a class="delete-a" href="{{request.META.HTTP_REFERER}}">Go back</a>
     </div>
+  </div>
 </form>
 
 {% endblock content %}

@@ -7,8 +7,12 @@ from account.models import CustomUserModel
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = '__all__'
-
+     
+        fields = ('host',
+                    'topic',
+                    'name',
+                    'description',
+        )
 
 class RegisterForm(UserCreationForm):
     class Meta:

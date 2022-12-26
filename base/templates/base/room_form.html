@@ -1,12 +1,29 @@
 {% extends 'main.html' %} {% block content %}
 <style>
+  .create-room-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  input[type="submit"] {
+    padding: 1rem;
+    color: white;
+    background-color: blue;
+  }
+
+  .room-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
 <div class="create-room-container">
-    <form method="Post" action="">
-        {% csrf_token %} {{form.as_p}}
-        <input type="submit" value="Submit">
-    </form>
+  <form method="Post" action="" class="room-Form">
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="Submit" />
+  </form>
 </div>
 
 {% endblock content %}

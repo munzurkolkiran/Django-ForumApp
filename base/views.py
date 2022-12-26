@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .models import Room, Topic, Message
 from .forms import RoomForm, RegisterForm
@@ -8,8 +8,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-
 
 def registerPage(request):
     form = RegisterForm()
@@ -23,8 +21,11 @@ def registerPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error occured during registration')
-    return render(request, 'base/login_register.html', {'form': form})
+
+            print(form.errors)
+            messages.error(
+                request, form.errors, 'An error occured during registration')
+    return render(request, 'base/login_register.html', {'registerform': form})
 
 
 def loginPage(request):
@@ -39,12 +40,13 @@ def loginPage(request):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, '')
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
+            messages.success(request, 'Logged in succesfuly')
             return redirect('home')
         else:
             messages.error(request, 'User name or password does not exist')

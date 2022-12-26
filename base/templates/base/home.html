@@ -1,226 +1,222 @@
 {% extends 'main.html' %} {% block content %}
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    
-    .home-container {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-    }
-    
-    .h3 {
-        /* border: 1px solid rgb(15, 29, 70); */
-        box-shadow: 0px 0px 2px 8px rgba(0, 0, 0, .4);
-        padding: 1rem;
-        border-radius: 20px;
-        margin-top: 70px;
-    }
-    
-    .fixed {
-        position: fixed;
-        overflow-x: hidden;
-        height: 30rem;
-        overflow: auto;
-        padding-right: 2rem;
-        top: 33%;
-        font-family: 'Courier New', Courier, monospace;
-        font-weight: 800;
-        margin-left: 20px;
-    }
-    
-    .home-sidebar {
-        padding: 1rem;
-        text-align: center;
-        top: 150px;
-        display: flex;
-        flex-direction: column;
-        width: 100px;
-    }
-    
-    .sidebar-header {
-        margin-bottom: 2rem;
-        position: fixed;
-        top: 110px;
-        color: rgb(57, 57, 237);
-    }
-    
-    .home-sidebar-header {
-        display: flex;
-        text-decoration: none;
-        padding: 1rem;
-        border: 1px solid royalblue;
-        width: 100%;
-        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
-        text-align: center;
-        font-size: large;
-        color: rgb(22, 22, 77);
-        border-radius: 20px;
-    }
-    
-    .topics {
-        margin-top: 1rem;
-    }
-    
-    .topics a {
-        color: rgb(57, 57, 237);
-        display: flex;
-        text-decoration: none;
-        padding: 1rem;
-        border: 1px solid royalblue;
-        width: 100%;
-        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
-        text-align: center;
-        border-radius: 20px;
-    }
-    
-    .home-main {
-        position: absolute;
-        top: 50px;
-        left: 350px;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .room-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        border: 1px solid royalblue;
-        width: 60vw;
-        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
-        margin-bottom: 2rem;
-    }
-    
-    .room-count {
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 1.2rem;
-    }
-    
-    .room-info a {
-        padding: 1rem;
-        font-size: 1.2rem;
-        font-family: 'Courier New', Courier, monospace;
-        text-decoration: none;
-        background-color: rgb(164, 181, 233);
-        text-transform: uppercase;
-        font-weight: bold;
-        color: black;
-    }
-    
-    .rooms-container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .room-wrapper {
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .rooms {
-        border: 1px solid rgb(15, 29, 70);
-        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
-        margin-bottom: 1rem;
-    }
-    
-    .duzenleme {
-        padding: 1rem;
-    }
-    
-    .duzenleme a {
-        padding: 0.5rem;
-        font-family: 'Oswald', sans-serif;
-    }
-    
-    .yazar {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        background-color: rgb(164, 181, 233);
-        color: black;
-    }
-    
-    .duzenleme a {
-        text-decoration: none;
-        color: black;
-        border: 1px solid royalblue;
-        box-shadow: 3px 5px 3px rgba(0, 0, 0, .4);
-    }
-    
-    .room-content {
-        padding-left: .4rem;
-    }
-    
-    .room-content h5 {
-        margin-bottom: 1.2rem;
-    }
-    
-    .room-content a {
-        text-transform: uppercase;
-        text-decoration: none;
-        color: red;
-        /* border: 1px solid orange; */
-        padding: 0.4rem;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .h3 {
+    /* border: 1px solid rgb(15, 29, 70); */
+    box-shadow: 0px 0px 2px 8px rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 20px;
+    margin-top: 70px;
+  }
+
+  .fixed {
+    position: fixed;
+    overflow-x: hidden;
+    height: 25rem;
+    overflow: auto;
+    padding-right: 2rem;
+    top: 33%;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 800;
+    margin-left: 20px;
+  }
+
+  .home-sidebar {
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
+  }
+
+  .sidebar-header {
+    margin-bottom: 2rem;
+    position: fixed;
+    top: 110px;
+    color: rgb(237, 153, 57);
+  }
+
+  .home-sidebar-header {
+    display: flex;
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px solid royalblue;
+    width: 100%;
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-size: large;
+    color: rgb(22, 22, 77);
+    border-radius: 20px;
+  }
+
+  .topics {
+    margin-top: 1rem;
+  }
+
+  .topics a {
+    color: rgb(57, 57, 237);
+    display: flex;
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px solid royalblue;
+    width: 100%;
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    border-radius: 20px;
+  }
+
+  .home-main {
+    position: absolute;
+    top: 50px;
+    left: 350px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .room-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid royalblue;
+    width: 60vw;
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+  }
+
+  .room-count {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.2rem;
+  }
+
+  .room-info a {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-family: "Courier New", Courier, monospace;
+    text-decoration: none;
+    background-color: rgb(164, 181, 233);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+  }
+
+  .rooms-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .room-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .rooms {
+    border: 1px solid rgb(15, 29, 70);
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1rem;
+  }
+
+  .duzenleme {
+    padding: 1rem;
+  }
+
+  .duzenleme a {
+    padding: 0.5rem;
+    font-family: "Oswald", sans-serif;
+  }
+
+  .yazar {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: rgb(164, 181, 233);
+    color: black;
+  }
+
+  .duzenleme a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid royalblue;
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .room-content {
+    padding-left: 0.4rem;
+  }
+
+  .room-content h5 {
+    margin-bottom: 1.2rem;
+  }
+
+  .room-content a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: red;
+    /* border: 1px solid orange; */
+    padding: 0.4rem;
+  }
 </style>
 
-
 <div class="home-container">
-    <div class="fixed">
-        <div class="sidebar-header">
-            <h3 class="h3">Browse Topics</h3>
+  <div class="fixed">
+    <div class="sidebar-header">
+      <h3 class="h3">Browse Topics</h3>
+    </div>
+    <div class="home-sidebar">
+      <div>
+        <a class="home-sidebar-header" href="{% url 'home' %}">All</a>
+        {% for topic in topics %}
+        <div class="topics">
+          <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
         </div>
-        <div class="home-sidebar">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 
-            <div>
-                <a class="home-sidebar-header" href="{% url 'home' %}">All</a> {% for topic in topics %}
-                <div class="topics">
-                    <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+  <div class="home-main">
+    <div class="room-info">
+      <div class="room-count">
+        <h5>{{room_count}} rooms avaiable</h5>
+      </div>
+      <a href="{% url 'create-room' %}">Create room</a>
     </div>
 
-    <div class="home-main">
-        <div class="room-info">
-            <div class="room-count">
-                <h5>{{room_count}} rooms avaiable</h5>
-            </div>
-            <a href="{% url 'create-room' %}">Create room</a>
+    <div class="rooms-container">
+      {% for room in rooms %}
+      <div class="rooms">
+        <div class="room-wrapper">
+          <div class="yazar">
+            <span>Yazar : @{{room.host.username}}</span>
+          </div>
+          {% if request.user == room.host %}
+          <div class="duzenleme">
+            <a href="{% url 'update-room' room.id%}">Edit</a>
+            <a href="{% url 'delete-room' room.id %}">Delete</a>
+          </div>
+          {% endif %}
         </div>
-
-        <div class="rooms-container">
-            {% for room in rooms %}
-            <div class="rooms">
-                <div class="room-wrapper">
-
-                    <div class="yazar">
-                        <span>Yazar : @{{room.host.username}}</span>
-                    </div>
-                    {% if request.user == room.host %}
-
-                    <div class="duzenleme">
-                        <a href="{% url 'update-room' room.id%}">Edit</a>
-                        <a href="{% url 'delete-room' room.id %}">Delete</a>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="room-content">
-                    <h5><a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
-                    <small>Room's name : {{room.topic.name}}</small>
-                </div>
-            </div>
-            {% endfor %}
+        <div class="room-content">
+          <h5><a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
+          <small>Room's name : {{room.topic.name}}</small>
         </div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </div>
-
 
 {% endblock content %}
